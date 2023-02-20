@@ -23,7 +23,7 @@ app.use(
 
 //connect DB
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://localhost/cleanBlog', () => console.log('db bağlantısı sağlandı'));
+mongoose.connect('mongodb+srv://ertanuzunoglu:Ertan6161.@cluster0.xym9nfy.mongodb.net/clean-blog-db?retryWrites=true&w=majority', () => console.log('db bağlantısı sağlandı'));
 
 app.get('/add_post', pageController.getAddPage);
 app.get('/about', pageController.getAboutPage);

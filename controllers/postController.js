@@ -3,9 +3,17 @@ const moment = require('moment');
 const fs = require('fs');
 
 exports.getAllPosts = async (req, res) => {
-    const posts = await Post.find({}).sort('-dateCreated');
+    const page = req.query.page || 1;
+    const postsPerPage = 3;
+    const totalPosts = await Post.find().countDocuments();
+    const posts = await Post.find({})
+        .sort('-dateCreated')
+        .skip((page - 1) * postsPerPage) //geçececeği fotoğraf sayısını belirtiyoruz.
+        .limit(postsPerPage); //her sayfada kaç adet göstereceğini belirtiyoruz.
     res.render('index', {
         posts: posts,
+        current: page, // anlık sayfa numarası
+        pages: Math.ceil(totalPosts / postsPerPage), //toplam sayfa sayısı // math ceil yukarı yuvarlamak için
     });
 };
 
