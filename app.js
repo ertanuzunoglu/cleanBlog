@@ -34,5 +34,7 @@ app.get('/post/:id', postController.getPost);
 app.get('/', postController.getAllPosts);
 app.delete('/post/:id', postController.deletePost);
 
-port = 3000;
-app.listen(port, () => console.log(`sunucu ${port} portunda çalışıyor`));
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
+    console.log(`Sunucu ${port} portunda çalışıyor.`);
+});
